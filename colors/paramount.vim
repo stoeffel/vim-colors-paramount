@@ -52,9 +52,10 @@ let s:background = &background
 if &background == "dark"
   let s:bg              = s:black
   let s:bg_subtle       = s:lighter_black
+  let s:comment         = s:lighter_black
   let s:bg_very_subtle  = s:subtle_black
-  let s:norm            = s:lighter_gray
-  let s:norm_subtle     = s:medium_gray
+  let s:norm            = s:lightest_gray
+  let s:norm_subtle     = s:lighter_gray
   let s:purple          = s:light_purple
   let s:cyan            = s:light_cyan
   let s:green           = s:light_green
@@ -64,6 +65,7 @@ if &background == "dark"
 else
   let s:bg              = s:actual_white
   let s:bg_subtle       = s:light_gray
+  let s:comment         = s:light_gray
   let s:bg_very_subtle  = s:lightest_gray
   let s:norm            = s:light_black
   let s:norm_subtle     = s:medium_gray
@@ -87,7 +89,7 @@ function! s:h(group, style)
     \ "cterm="   (has_key(a:style, "cterm") ? a:style.cterm    : "NONE")
 endfunction
 
-call s:h("Normal",        {"bg": s:bg, "fg": s:norm})
+call s:h("Normal",        {"bg": none, "fg": s:norm})
 
 " restore &background's value in case changing Normal changed &background (:help :hi-normal-cterm)
 if &background != s:background
@@ -95,7 +97,7 @@ if &background != s:background
 endif
 
 call s:h("Cursor",        {"bg": s:purple, "fg": s:norm })
-call s:h("Comment",       {"fg": s:bg_subtle, "gui": "italic"})
+call s:h("Comment",       {"fg": s:comment, "gui": "italic"})
 
 call s:h("Constant",      {"fg": s:purple})
 hi! link Character        Constant
